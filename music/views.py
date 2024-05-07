@@ -6,6 +6,9 @@ from .serializers import ArtistSerializer,AlbomSerializer,SongsSerializer
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated,IsAdminUser
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.filters import SearchFilter
+from rest_framework import filters
+from rest_framework.pagination import LimitOffsetPagination
 class LandingPageAPIView(APIView):
     def get(self,request):
         return Response(data={"get": "yaxshi" })
@@ -46,7 +49,10 @@ class SongSetApiView(ModelViewSet):
     queryset = Songs.objects.all()
     serializer_class = SongsSerializer
     authentication_classes = (TokenAuthentication, )
-    permission_classes = (IsAdminUser, )
+    # permission_classes = (IsAdminUser, )
+    filter_backends = (filters.SearchFilter, )
+    search_fields = ['title', ]  # ['^title', ] ['@title', ] ['=title', ]
+    pagination_class = LimitOffsetPagination
     # permission_classes = (AllowAny, )
     # def get(self,request,id):
     #     songs = Songs.objects.get(id=id)
