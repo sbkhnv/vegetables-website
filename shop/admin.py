@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import products
+from .models import Products
 
-@admin.register(products)
-class productAdmin(admin.ModelAdmin):
+@admin.register(Products)
+class ProductAdmin(admin.ModelAdmin):
     list_display = ("type","name","description","price","image")
