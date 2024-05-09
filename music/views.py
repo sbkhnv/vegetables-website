@@ -48,8 +48,8 @@ class AlbomDetailApiView(ModelViewSet):
 class SongSetApiView(ModelViewSet):
     queryset = Songs.objects.all()
     serializer_class = SongsSerializer
-    authentication_classes = (TokenAuthentication, )
-    # permission_classes = (IsAdminUser, )
+    # authentication_classes = (TokenAuthentication, )
+    permission_classes = (IsAuthenticated, )
     filter_backends = (filters.SearchFilter, )
     search_fields = ['title', ]  # ['^title', ] ['@title', ] ['=title', ]
     pagination_class = LimitOffsetPagination
